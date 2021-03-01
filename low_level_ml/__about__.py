@@ -1,0 +1,5 @@
+__version__ = "0.0.1-dev"
+__author__ = "IceCube Collaboration"
+__author_email__ = "analysis@icecube.wisc.edu"
+__description__ = "Code related to applying ML to low-level IceCube data"
+__url__ = "https://github.com/icecube/low-level-ml"
