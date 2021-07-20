@@ -160,7 +160,7 @@ if __name__ == "__main__":
         data_transformer=i3deepice_trafo,
         batch_size=args.batch_size,
         output_key=f"ml_suite_{args.model}",
-        If=lambda fr: fr["I3EventHeader"].sub_event_stream == "InIceSplit",
+        sub_event_stream="InIceSplit",
     )
 
     if args.outfile is not None:
