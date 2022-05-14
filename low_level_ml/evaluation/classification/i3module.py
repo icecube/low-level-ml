@@ -1,3 +1,4 @@
+"""Implements I3Module for DNN classifier"""
 import argparse
 import importlib
 import os
@@ -7,10 +8,9 @@ import numpy as np
 import tensorflow as tf
 
 from I3Tray import I3Tray
-from icecube import dataclasses, icetray, dataio
 from icecube import ml_suite
 
-from typing import Optional, Callable, List
+from typing import Optional, Callable, List, Union
 
 
 class I3DeepiceHexDataTransformer(ml_suite.hex.HexDataTransformer):
@@ -40,7 +40,7 @@ class I3DeepiceHexDataTransformer(ml_suite.hex.HexDataTransformer):
 
     def __init__(
         self,
-        config: (str, dict),
+        config: Union[str, dict],
         name: str,
         string_axis: int = 1,
         norm_transformations: Optional[List[Callable]] = None,
