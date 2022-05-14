@@ -8,7 +8,7 @@ import numpy as np
 import tensorflow as tf
 
 from I3Tray import I3Tray
-from icecube import ml_suite
+from icecube import ml_suite, dataclasses, dataio
 
 from typing import Optional, Callable, List, Union
 
