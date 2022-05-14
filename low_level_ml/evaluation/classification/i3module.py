@@ -123,7 +123,7 @@ def parseArguments():
     )
     parser.add_argument("--i3deepice_dir", type=str, required=True)
     parser.add_argument("--batch_size", type=int, default=48)
-    parser.add_argument("--model", type=str, default="classification")
+    parser.add_argument("--model", type=str, default="theo_dnn_classification")
     parser.add_argument("--outfile", type=str, default=None)
     args = parser.parse_args()
     return args
