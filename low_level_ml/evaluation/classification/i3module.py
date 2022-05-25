@@ -123,7 +123,8 @@ def parseArguments():
     )
     parser.add_argument("--i3deepice_dir", type=str, required=True)
     parser.add_argument("--batch_size", type=int, default=48)
-    parser.add_argument("--model", type=str, default="theo_dnn_classification")
+    parser.add_argument("--i3deepice-model", type=str, default="classification")
+    parser.add_argument("--mlsuite-config", type=str, default="theo_dnn_classification")
     parser.add_argument("--outfile", type=str, default=None)
     args = parser.parse_args()
     return args
@@ -132,7 +133,7 @@ def parseArguments():
 if __name__ == "__main__":
     args = parseArguments()
 
-    nn_model = get_model(args.model, args.i3deepice_dir)
+    nn_model = get_model(args.i3deepice_model, args.i3deepice_dir)
 
     config = os.path.join(
         os.getenv("I3_BUILD"), "ml_suite/resources/grid_transformations.yaml"
@@ -140,9 +141,17 @@ if __name__ == "__main__":
     i3deepice_trafo = get_i3deepice_trafo(config)
 
     # Create feature extractor.
-    classification_features_model = os.path.join(
-        os.getenv("I3_BUILD"), f"ml_suite/resources/{args.model}_model.yaml"
+
+    maybe_path = os.path.join(
+        os.getenv("I3_BUILD"), f"ml_suite/resources/{args.mlsuite_config}_model.yaml"
     )
+    if not os.path.exists(maybe_path):
+        if not os.path.exists(args.mlsuite_config):
+            raise RuntimeError(f"Could not load config {args.mlsuite_config}")
+        else:
+            maybe_path = args.mlsuite_config
+
+    classification_features_model = maybe_path
     eff = ml_suite.EventFeatureFactory(classification_features_model)
     event_feat_ext = eff.make_feature_extractor()
 
