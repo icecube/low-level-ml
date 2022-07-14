@@ -168,7 +168,7 @@ if __name__ == "__main__":
         event_feature_extractor=event_feat_ext,
         data_transformer=i3deepice_trafo,
         batch_size=args.batch_size,
-        output_key=f"ml_suite_{args.model}",
+        output_key=f"ml_suite_{args.i3deepice_model}",
         sub_event_stream="InIceSplit",
     )
 
