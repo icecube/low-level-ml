@@ -79,7 +79,7 @@ def get_model(model, i3deepice_dir):
         os.path.join(i3deepice_dir, f"i3deepice/models/{model}/weights.npy")
     )
 
-    return nn_model
+    return nn_model, list(model_def.output_names.values())
 
 
 def get_i3deepice_trafo(config):
@@ -133,7 +133,7 @@ def parseArguments():
 if __name__ == "__main__":
     args = parseArguments()
 
-    nn_model = get_model(args.i3deepice_model, args.i3deepice_dir)
+    nn_model, output_names = get_model(args.i3deepice_model, args.i3deepice_dir)
 
     config = os.path.join(
         os.getenv("I3_BUILD"), "ml_suite/resources/grid_transformations.yaml"
@@ -169,6 +169,7 @@ if __name__ == "__main__":
         data_transformer=i3deepice_trafo,
         batch_size=args.batch_size,
         output_key=f"ml_suite_{args.i3deepice_model}",
+        output_names=output_names,
         sub_event_stream="InIceSplit",
     )
 
