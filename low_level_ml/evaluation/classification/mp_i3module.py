@@ -194,7 +194,7 @@ def icetray_worker(
                 nn_model=call_model,
                 event_feature_extractor=event_feat_ext,
                 batch_size=worker_args["batch_size"],
-                output_key=f"ml_suite_{worker_args['i3deepice_model']}_0",
+                output_key=f"ml_suite_{worker_args['i3deepice_model']}",
                 output_names=worker_args["output_names"],
                 write_runtime_info=False,
                 sub_event_stream=worker_args["subeventstream"],
